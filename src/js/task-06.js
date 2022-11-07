@@ -28,10 +28,13 @@
 // }
 const inputEl = document.querySelector("#validation-input");
 const onCheckInputBlur = (event) => {
-  event.currentTarget.classList.remove("invalid");
-  if (event.currentTarget.value.length < event.currentTarget.dataset.length) {
-    event.currentTarget.classList.add("invalid");
+  if (
+    event.currentTarget.value.length ===
+    Number(event.currentTarget.dataset.length)
+  ) {
+    event.currentTarget.classList.add("valid");
+    return;
   }
-  event.currentTarget.classList.add("valid");
+  event.currentTarget.classList.toggle("invalid");
 };
 inputEl.addEventListener("blur", onCheckInputBlur);
