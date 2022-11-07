@@ -26,15 +26,20 @@
 // #validation-input.invalid {
 //   border-color: #f44336;
 // }
-const inputEl = document.querySelector("#validation-input");
-const onCheckInputBlur = (event) => {
-  if (
-    event.currentTarget.value.length ===
-    Number(event.currentTarget.dataset.length)
-  ) {
-    event.currentTarget.classList.add("valid");
-    return;
+const textInputEl = document.querySelector("#validation-input");
+const validationInputEl = Number(textInputEl.getAttribute("data-length"));
+
+textInputEl.addEventListener("blur", onBlur);
+
+function addRemoveColor(remove, add) {
+  textInputEl.classList.remove(remove);
+  textInputEl.classList.add(add);
+}
+
+function onBlur(event) {
+  if (event.currentTarget.value.length === validationInputEl) {
+    addRemoveColor("invalid", "valid");
+  } else {
+    addRemoveColor("valid", "invalid");
   }
-  event.currentTarget.classList.toggle("invalid");
-};
-inputEl.addEventListener("blur", onCheckInputBlur);
+}
